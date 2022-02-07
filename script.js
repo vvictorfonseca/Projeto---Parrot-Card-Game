@@ -1,4 +1,3 @@
-
 let imgFront = ["bobrossparrot", "explodyparrot", "fiestaparrot", "metalparrot", "revertitparrot", "tripletsparrot", "unicornparrot" ];
 let cartasEscolhidas = [];
 let firstCard = null;
@@ -8,24 +7,22 @@ let numeroDeCartas = 0;
 let ismatch = null;
 let contador = 0;
 let ponto = 0;
+let msg = null;
 
-const clock = document.querySelector(".relogio")
-let intervalo = null;
+validateCards ()
 
-validarNumeroDeCartas ()
+/* Função para validar o número de cartas e pegar do usuário o Número de Cartas para o jogo */
 
-/* Validar o número de cartas e pegar do usuário o Número de Cartas para o jogo */
-
-function validarNumeroDeCartas () {
+function validateCards () {
     numeroDeCartas = prompt("Com quantas cartas você quer jogar? (Números Pares entre 4 e 14)" ); 
 
     while (numeroDeCartas < 4 || numeroDeCartas > 14 || numeroDeCartas % 2 !== 0) {
         numeroDeCartas = parseInt(prompt("Com quantas cartas você quer jogar? (Números Pares entre 4 e 14)")); 
    }
-   preencherJogo(numeroDeCartas);
+   fillGame(numeroDeCartas);
 }
 
-function preencherJogo(numeroDeCartas) {
+function fillGame(numeroDeCartas) {
    for (let i = 0; i < numeroDeCartas/2; i++) {
        cartasEscolhidas.push(imgFront[i]);
        cartasEscolhidas.push(imgFront[i]);
@@ -46,10 +43,7 @@ function preencherJogo(numeroDeCartas) {
    </li>`
    }
    const cartas = document.querySelectorAll(".carta");
-   cartas.forEach(card => card.addEventListener("click", virarCarta));
-
-   intervalo = setInterval(aumentarContagem, 1000);
-   clock.innerHTML = 0;
+   cartas.forEach(card => card.addEventListener("click", virarCarta));  
 }
 
 /*Função para virar a carta ao clicar */
@@ -71,6 +65,8 @@ function virarCarta () {
     
     checkForMatch()
 }
+
+//Função para checar se as cartas são iguais //
 
 function checkForMatch() {
    
@@ -113,25 +109,25 @@ function comparador() {
 	return Math.random() - 0.5; 
 }
 
+//Função para finalizar o jogo e criar um novo//
+
 function endGame (){
-    msg = prompt(`Parabéns, você ganhou em ${contador} jogadas, deseja jogar novamente? (Sim ou Não)?`)
-    if (msg === "Sim"){
+    msg = prompt(`Parabéns, você ganhou em ${contador} jogadas, deseja jogar novamente? (S ou N)?`)
+
+    console.log(msg)
+    
+    if (msg === "S") {
         numeroDeCartas = 0;
         contador = 0;
         ponto = 0;
+        cartasEscolhidas = [];
         let ul = document.querySelector("ul");
         ul.innerHTML = "";
         cleanCards ()
-        validarNumeroDeCartas ()
-    }else {
-        alert("Obrigado por jogar");
+        validateCards ()
+    } else  if (msg === "N") {
+      let ul = document.querySelector("ul");
+      ul.innerHTML = "";
+      alert("Obrigado por jogar");
     }
 }
-
-function aumentarContagem () {
-    if (endGame) {
-        clearInterval(intervalo);
-    } else {
-        clock.innerHTML = parseInt(clock.innerHTML) + 1
-    }
-} 

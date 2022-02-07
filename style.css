@@ -45,18 +45,6 @@ ul {
    align-items: center;
 }
 
-.relogio {
-    display: flex;
-    position: relative;
-    margin-left: 950px;
-    margin-top: -40;
-}
-
-.timer {
-    width: 20px;
-    margin-top: -2.5px;
-}
-
 .carta {
     position: relative;
     width: 117px;
@@ -122,13 +110,12 @@ ul {
        letter-spacing: -0.004em;
        text-align: center;
        width: 312px;
-       margin: 30px auto 10px auto;
+       display: flex;
+       justify-content: center;
     }
 
     main section {
-       margin-left: 150px;
-       margin-right: 115px;
-       margin-bottom: 40px;
+       margin-left: 155px;
     }
 }
 
